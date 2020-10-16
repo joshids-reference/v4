@@ -2,9 +2,12 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: config.siteTitle,
-    siteUrl: config.siteUrl,
-    description: config.siteDescription,
+    title: 'Brittany Chiang',
+    description:
+      'Brittany Chiang is a software engineer specializing in building (and occasionally designing) exceptional websites, applications, and everything in between.',
+    siteUrl: 'https://brittanychiang.com', // No trailing slash allowed!
+    image: '/og.png', // Path to your image you placed in the 'static' folder
+    twitterUsername: '@bchiang7',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -19,13 +22,20 @@ module.exports = {
         name: 'BrittanyChiang',
         short_name: 'BrittanyChiang',
         start_url: '/',
-        background_color: config.darkNavyColor,
-        theme_color: config.navyColor,
+        background_color: config.colors.darkNavy,
+        theme_color: config.colors.navy,
         display: 'minimal-ui',
         icon: 'src/images/logo.png',
       },
     },
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -36,15 +46,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/posts`,
         name: `posts`,
+        path: `${__dirname}/content/posts`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/projects`,
         name: `projects`,
+        path: `${__dirname}/content/projects`,
       },
     },
     {
@@ -66,7 +76,7 @@ module.exports = {
               maxWidth: 700,
               linkImagesToOriginal: true,
               quality: 90,
-              tracedSVG: { color: '#64ffda' },
+              tracedSVG: { color: config.colors.green },
             },
           },
           {
@@ -141,7 +151,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: config.googleAnalyticsID,
+        trackingId: 'UA-45666519-2',
       },
     },
   ],
